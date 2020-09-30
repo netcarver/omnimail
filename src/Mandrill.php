@@ -118,6 +118,14 @@ class Mandrill implements MailerInterface
                 $message['images'] = $this->mapInlineAttachments($email->getAttachments());
             }
 
+            if ($email->getTag()) {
+                $message['tags'][] = $email->getTag();
+            }
+
+            if ($email->getMetas()) {
+                $message['metadata'] = $email->getMetas();
+            }
+
             $result = $this->mandrill->messages->send($message, false, $this->ipPool);
             $result = current($result);
             if ($result && $result['status'] &&
