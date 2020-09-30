@@ -62,13 +62,16 @@ class Postmark implements MailerInterface
                 $email->getSubject(),
                 $email->getHtmlBody(),
                 $email->getTextBody(),
-                null,
-                true,
+                $email->getTag(),
+                true, // Track opens of HTML emails
                 $this->mapEmails($email->getReplyTos()),
                 $this->mapEmails($email->getCcs()),
                 $this->mapEmails($email->getBccs()),
-                null,
-                $this->mapAttachments($email->getAttachments())
+                null, // Additional headers
+                $this->mapAttachments($email->getAttachments()),
+                null, // Track links - one of None|HtmlAndTest|HtmlOnly|TextOnly
+                $email->getMetas(), // Metadata
+                null, // Message Stream
             );
 
             if (!isset($sendResult) || (!isset($sendResult[0]) && !isset($sendResult['ErrorCode']))) {
@@ -90,6 +93,7 @@ class Postmark implements MailerInterface
             }
 
             return $sendResult;
+
         } catch (Exception $e) {
             if ($this->logger) {
                 $this->logger->info("Postmark - Email error: '{$e->getMessage()}'", $email->toArray());
