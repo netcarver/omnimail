@@ -34,6 +34,8 @@
    - [Text Body](#email-text-body)
    - [HTML Body](#email-html-body)
    - [Attachments](#email-attachments)
+   - [Tag](#email-tag)
+   - [Metadata](#email-metadata)
 5. [Mass Mailings](#mass-mailings)
 6. [Factory](#factory)
 7. [Exceptions](#exceptions)
@@ -52,7 +54,7 @@ It is recommended that you install the Omnimail library [through composer](http:
 run the Composer command to install the latest stable version of Omnimail library.
 
 ```shell
-composer require omnimail/omnimail
+composer require netcarver/omnimail
 ```
 
 <a name="providers"></a>
@@ -315,8 +317,8 @@ $mailer->send($email);
 <a name="email"></a>
 ## Email
 
-An `Email` object implements the `EmailInterface`  inteface. You can create your own `Email` class and send it to any
-mailer if it implements the `EmailInterface` inteface.
+An `Email` object implements the `EmailInterface`  interface. You can create your own `Email` class and send it to any
+mailer if it implements the `EmailInterface` interface.
 
 <a name="email-to"></a>
 ### To
@@ -448,6 +450,19 @@ $email = new Email();
 $email->setHtmlBody('<p>Hello!</p><img src="cid:image.png">');
 $email->addAttachment($attachment);
 ```
+
+<a name="email-tag"></a>
+### Tag
+
+The `Tag` property of the email allows the tagging of an email object with a string.
+Many provider APIs now allow emails they handle to be tagged.
+
+<a name="email-metadata"></a>
+### Metadata
+
+The `metas` property allows an array of key-value pairs to be associated with an email.
+Some providers allow the association of this metadata with an email.
+
 
 <a name="factory"></a>
 ## Factory
