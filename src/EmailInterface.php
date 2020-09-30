@@ -5,6 +5,48 @@ namespace Omnimail;
 interface EmailInterface
 {
     /**
+     * Generate your own $id and pass it in to override the class' own id generation.
+     *
+     * The ID is also added as an entry to the meta data array.
+     *
+     * @param string $id
+     */
+    public function __construct($id = null);
+
+    /**
+     * @return $this
+     */
+    public function resetMetas();
+
+    /**
+     * @param string $key
+     * @param string $value
+     * @return $this
+     */
+    public function addMeta(string $key, string $value);
+
+    /**
+     * @return array
+     */
+    public function getMetas();
+
+    /**
+     * @return string
+     */
+    public function getID();
+
+    /**
+     * @param string $tag
+     * @return $this
+     */
+    public function setTag(string $tag);
+
+    /**
+     * @return string
+     */
+    public function getTag();
+
+    /**
      * @return string
      */
     public function getTextBody();

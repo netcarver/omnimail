@@ -50,6 +50,93 @@ class Email implements EmailInterface
     protected $htmlBody;
 
     /**
+     * @var string
+     */
+    protected $id;
+
+
+    /**
+     * @var string
+     */
+    protected $tag;
+    
+    
+    /**
+     * @var array
+     */
+    protected $metas = [];
+
+
+    /**
+     * Generate your own $id and pass it in to override the class' own id generation.
+     *
+     * The ID is also added as an entry to the meta data array.
+     *
+     * @param string $id
+     */
+    public function __construct($id = null) {
+        $prefix = gethostname();
+        $this->id = $id ?? uniqid("$prefix-", true);
+        $this->resetMetas();
+    }
+
+
+    /**
+     * @return $this
+     */
+    public function resetMetas() {
+        $this->metas = ['id' => $this->getID() ];
+        return $this;
+    }
+
+
+    /**
+     * @param string $key
+     * @param string $value
+     * @return $this
+     */
+    public function addMeta(string $key, string $value) {
+        $this->metas[$key] = $value;
+        return $this;
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getMetas() {
+        return $this->metas;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getID() {
+        return $this->id;
+    }
+
+
+    /**
+     * @param string $tag
+     * @return $this
+     */
+    public function setTag(string $tag) {
+        $this->tag = $tag;
+        return $this;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getTag() {
+        return $this->tag;
+    }
+
+
+
+    /**
      * @return string
      */
     public function getTextBody()
@@ -275,7 +362,10 @@ class Email implements EmailInterface
             'tos' => $this->getTos(),
             'replyTos' => $this->getReplyTos(),
             'ccs' => $this->getCcs(),
-            'bccs' => $this->getBccs()
+            'bccs' => $this->getBccs(),
+            'id' => $this->getID(),
+            'metas' => $this->getMetas(),
+            'tag' => $this->getTag(),
         ];
     }
 }
