@@ -1,5 +1,5 @@
 {
-    "name" : "omnimail/omnimail",
+    "name" : "netcarver/omnimail",
     "type" : "library",
     "description" : "PHP Library to send email across all platforms using one interface.",
     "keywords" : [
