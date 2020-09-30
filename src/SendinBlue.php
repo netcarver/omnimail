@@ -68,7 +68,7 @@ class SendinBlue implements MailerInterface
         $response = $mailin->send_email($data);
         if ($response && $response['code'] && $response['code'] === 'success') {
             if ($this->logger) {
-                $this->logger->info("Email sent: '{$email->getSubject()}'", $email->toArray());
+                $this->logger->info("SendinBlue - Email sent: '{$email->getSubject()}'", $email->toArray());
             }
         } else {
             if (!$response || !$response['code']) {
@@ -77,12 +77,12 @@ class SendinBlue implements MailerInterface
                 switch ($response['code']) {
                     case 'failure':
                         if ($this->logger) {
-                            $this->logger->info("Email error: '{$response['message']}'", $email->toArray());
+                            $this->logger->info("SendinBlue - Email error: '{$response['message']}'", $email->toArray());
                         }
                         throw new InvalidRequestException($response['message']);
                     case 'error':
                         if ($this->logger) {
-                            $this->logger->info("Email error: '{$response['message']}'", $email->toArray());
+                            $this->logger->info("SendinBlue - Email error: '{$response['message']}'", $email->toArray());
                         }
                         throw new InvalidRequestException($response['message']);
                 }

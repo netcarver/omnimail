@@ -86,16 +86,18 @@ class Postmark implements MailerInterface
             }
 
             if ($this->logger) {
-                $this->logger->info("Email sent: '{$email->getSubject()}'", $email->toArray());
+                $this->logger->info("Postmark - Email sent: '{$email->getSubject()}'", $email->toArray());
             }
+
+            return $sendResult;
         } catch (Exception $e) {
             if ($this->logger) {
-                $this->logger->info("Email error: '{$e->getMessage()}'", $email->toArray());
+                $this->logger->info("Postmark - Email error: '{$e->getMessage()}'", $email->toArray());
             }
             throw $e;
         } catch (PostmarkException $e) {
             if ($this->logger) {
-                $this->logger->info("Email error: '{$e->getMessage()}'", $email->toArray());
+                $this->logger->info("Postmark - Email error: '{$e->getMessage()}'", $email->toArray());
             }
             switch ($e->postmarkApiErrorCode) {
                 case 10:
@@ -115,7 +117,7 @@ class Postmark implements MailerInterface
             }
         } catch (\Exception $e) {
             if ($this->logger) {
-                $this->logger->info("Email error: '{$e->getMessage()}'", $email->toArray());
+                $this->logger->info("Postmark - Email error: '{$e->getMessage()}'", $email->toArray());
             }
             throw new Exception($e->getMessage(), $e->getCode(), $e);
         }

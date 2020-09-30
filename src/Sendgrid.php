@@ -120,7 +120,7 @@ class Sendgrid implements MailerInterface
 
         if ($response->statusCode() >= 200 && $response->statusCode() < 300) {
             if ($this->logger) {
-                $this->logger->info("Email sent: '{$email->getSubject()}'", $email->toArray());
+                $this->logger->info("Sendgrid - Email sent: '{$email->getSubject()}'", $email->toArray());
             }
         } else {
             $content = json_decode($response->body(), true);
@@ -131,12 +131,12 @@ class Sendgrid implements MailerInterface
             switch ($response->statusCode()) {
                 case 401:
                     if ($this->logger) {
-                        $this->logger->info("Email error: 'unauthorized'", $email->toArray());
+                        $this->logger->info("Sendgrid - Email error: 'unauthorized'", $email->toArray());
                     }
                     throw new UnauthorizedException($error);
                 default:
                     if ($this->logger) {
-                        $this->logger->info("Email error: 'invalid request'", $email->toArray());
+                        $this->logger->info("Sendgrid - Email error: 'invalid request'", $email->toArray());
                     }
                     throw new InvalidRequestException($error);
             }

@@ -124,7 +124,7 @@ class Mandrill implements MailerInterface
                 ($result['status'] === 'sent' || $result['status'] === 'queued' || $result['status'] === 'scheduled')
             ) {
                 if ($this->logger) {
-                    $this->logger->info("Email sent: '{$email->getSubject()}'", $email->toArray());
+                    $this->logger->info("Mandrill - Email sent: '{$email->getSubject()}'", $email->toArray());
                 }
             } else {
                 if (!$result || !$result['status']) {
@@ -142,7 +142,7 @@ class Mandrill implements MailerInterface
             }
         } catch (Exception $e) {
             if ($this->logger) {
-                $this->logger->info("Email error: '{$e->getMessage()}'", $email->toArray());
+                $this->logger->info("Mandrill - Email error: '{$e->getMessage()}'", $email->toArray());
             }
             throw $e;
         }

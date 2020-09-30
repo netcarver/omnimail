@@ -109,11 +109,11 @@ class Mailjet implements MailerInterface
 
         if ($response->success()) {
             if ($this->logger) {
-                $this->logger->info("Email sent: '{$email->getSubject()}'", $email->toArray());
+                $this->logger->info("Mailjet - Email sent: '{$email->getSubject()}'", $email->toArray());
             }
         } else {
             if ($this->logger) {
-                $this->logger->error("Email error: '{$response->getReasonPhrase()}'", $email->toArray());
+                $this->logger->error("Mailjet - Email error: '{$response->getReasonPhrase()}'", $email->toArray());
             }
             throw new InvalidRequestException($response->getReasonPhrase());
         }
