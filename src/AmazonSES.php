@@ -223,6 +223,8 @@ class AmazonSES extends AbstractMailer implements MailerInterface
                 $this->logger->info("AmazonSES - Email sent: '{$email->getSubject()}'", $email->toArray());
             }
         }
+
+        return $response;
     }
 
     /**

@@ -117,6 +117,8 @@ class Mailjet implements MailerInterface
             }
             throw new InvalidRequestException($response->getReasonPhrase());
         }
+
+        return $response;
     }
 
     /**

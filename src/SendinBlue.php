@@ -88,6 +88,7 @@ class SendinBlue implements MailerInterface
                 }
             }
         }
+        return $response;
     }
 
     /**

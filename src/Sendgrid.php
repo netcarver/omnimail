@@ -141,6 +141,7 @@ class Sendgrid implements MailerInterface
                     throw new InvalidRequestException($error);
             }
         }
+        return $response;
     }
 
     /**

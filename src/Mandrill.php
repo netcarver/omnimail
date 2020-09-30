@@ -140,6 +140,9 @@ class Mandrill implements MailerInterface
                         throw new EmailDeliveryException($result['reject_reason']);
                 }
             }
+
+            return $result;
+
         } catch (Exception $e) {
             if ($this->logger) {
                 $this->logger->info("Mandrill - Email error: '{$e->getMessage()}'", $email->toArray());
