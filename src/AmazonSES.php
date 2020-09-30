@@ -175,6 +175,14 @@ class AmazonSES extends AbstractMailer implements MailerInterface
             $m->addBCC($this->mapEmails($email->getBccs()));
         }
 
+        if ($email->getTag()) {
+            $m->setMessageTag('tag', $email->getTag());
+        }
+
+        if ($email->getMetas()) {
+            $m->setMessageTags($email->getMetas());
+        }
+
         $m->setSubject($email->getSubject());
         $m->setMessageFromString($email->getTextBody(), $email->getHtmlBody());
 
