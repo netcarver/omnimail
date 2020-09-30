@@ -71,7 +71,7 @@ class Postmark implements MailerInterface
                 $this->mapAttachments($email->getAttachments()),
                 null, // Track links - one of None|HtmlAndTest|HtmlOnly|TextOnly
                 $email->getMetas(), // Metadata
-                null, // Message Stream
+                null // Message Stream
             );
 
             if (!isset($sendResult) || (!isset($sendResult[0]) && !isset($sendResult['ErrorCode']))) {
