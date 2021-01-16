@@ -103,6 +103,14 @@ class Postmark implements MailerInterface
             if ($this->logger) {
                 $this->logger->info("Postmark - Email error: '{$e->getMessage()}'", $email->toArray());
             }
+
+            // 503 status codes returned from postmark if service is temporarily down for planned outage.
+            //
+            // Using EmailDeliveryException for reschedulable email send attempts...
+            if (503 === $e->httpStatusCode && $e->httpStatusCode !== $e->postmarkApiErrorCode) {
+                throw new EmailDeliveryException($e->message, 600, $e);
+            }
+
             switch ($e->postmarkApiErrorCode) {
                 case 10:
                 case 400:
@@ -113,9 +121,9 @@ class Postmark implements MailerInterface
                 case 502:
                 case 503:
                     throw new UnauthorizedException($e->message, 602, $e);
-                case 100:
-                case 411:
+                case 100: // API maintenance - can retry...
                     throw new EmailDeliveryException($e->message, 600, $e);
+                /* case 411: */
                 default:
                     throw new InvalidRequestException($e->message, 601, $e);
             }
