@@ -186,6 +186,6 @@ class Postmark implements MailerInterface
      */
     private function mapEmail(array $email)
     {
-        return !empty($email['name']) ? "'{$email['name']}' <{$email['email']}>" : $email['email'];
+        return !empty($email['name']) ? "{$email['name']} <{$email['email']}>" : $email['email'];
     }
 }
