@@ -63,7 +63,7 @@ class Postmark implements MailerInterface
                 $email->getHtmlBody(),
                 $email->getTextBody(),
                 $email->getTag(),
-                true, // Track opens of HTML emails
+                $email->getTrackOpens(),
                 $this->mapEmails($email->getReplyTos()),
                 $this->mapEmails($email->getCcs()),
                 $this->mapEmails($email->getBccs()),

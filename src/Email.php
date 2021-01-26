@@ -54,12 +54,15 @@ class Email implements EmailInterface
      */
     protected $id;
 
-
     /**
      * @var string
      */
     protected $tag;
-    
+
+    /**
+     * @var bool
+     */
+    protected $trackOpens = false;
     
     /**
      * @var array
@@ -134,6 +137,25 @@ class Email implements EmailInterface
         return $this->tag;
     }
 
+
+    /**
+     * @param bool $track
+     * @return $this
+     */
+    public function setTrackOpens(bool $track)
+    {
+        $this->trackOpens = $track;
+        return $this;
+    }
+
+
+    /**
+     * @return bool
+     */
+    public function getTrackOpens()
+    {
+        return $this->trackOpens;
+    }
 
 
     /**
@@ -366,6 +388,7 @@ class Email implements EmailInterface
             'id' => $this->getID(),
             'metas' => $this->getMetas(),
             'tag' => $this->getTag(),
+            'trackOpens' => $this->getTrackOpens(),
         ];
     }
 }

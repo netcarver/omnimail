@@ -36,6 +36,17 @@ interface EmailInterface
     public function getID();
 
     /**
+     * @param bool $track
+     * @return $this
+     */
+    public function setTrackOpens(bool $track);
+
+    /**
+     * @return bool
+     */
+    public function getTrackOpens();
+
+    /**
      * @param string $tag
      * @return $this
      */
